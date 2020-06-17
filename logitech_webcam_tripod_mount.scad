@@ -42,8 +42,8 @@ difference() {
                     hullPlate(screwMountBodyWidth, screwMountBodyDepth, cornerRoundnessRadius);
             }
     }
-    translate([outerWidth/2,bracketDepth/2,outerHeight-screwMountDepth+overlap])
-        english_thread(0.25, 20, screwMountDepthInches);
+    translate([outerWidth/2,bracketDepth/2,outerHeight-screwMountDepth+overlap*2])
+        english_thread(0.25, 20, screwMountDepthInches, internal=true, leadin=1);
     translate([outerWidth/2,0,(outerHeight-screwMountDepth)/2]) {
         cameraBracketShape();
     }
