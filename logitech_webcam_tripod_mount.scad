@@ -10,17 +10,19 @@ lowerThickness=5;
 sideThickness=6;
 
 
-bracketDepth=40;
-bracketSideRadius=4.5;
+bracketDepth=33;
+bracketSideRadius=6.4;
+bracketBumpRadius=2.25;
+bracketBumpCenterToCenter=28;
 cornerRoundnessRadius=3;
 
-screwMountBodyDepth=bracketDepth/2;
+screwMountBodyDepth=bracketDepth*2/3;
 
 screwMountDepth=9;
 screwMountDepthInches=screwMountDepth*inchesPerMillimeter;
 
 outerWidth=cameraBracketWidth+sideThickness*2;
-screwMountBodyWidth=outerWidth/3;
+screwMountBodyWidth=outerWidth*2/3;
 bracketReceiverHeight=lowerThickness*2+cameraBracketCenterThickness;
 outerHeight=bracketReceiverHeight+screwMountDepth;
 
@@ -52,12 +54,18 @@ difference() {
 
 module cameraBracketShape() {
     translate([0,-overlap,0]) rotate([-90,0,0])
+    union() {
         hull() {
             translate([-cameraBracketWidth/2+bracketSideRadius,0,0])
-            cylinder(r=bracketSideRadius, h=bracketDepth+overlap*2);
+                cylinder(r=bracketSideRadius, h=bracketDepth+overlap*2);
             translate([cameraBracketWidth/2-bracketSideRadius,0,0])
                 cylinder(r=bracketSideRadius, h=bracketDepth+overlap*2);
         }
+        translate([-bracketBumpCenterToCenter/2,-bracketSideRadius+bracketBumpRadius/2,0])
+            cylinder(r=bracketBumpRadius, h=bracketDepth+overlap*2);
+        translate([bracketBumpCenterToCenter/2,-bracketSideRadius+bracketBumpRadius/2,0])
+            cylinder(r=bracketBumpRadius, h=bracketDepth+overlap*2);
+    }
 }
 
 /*
